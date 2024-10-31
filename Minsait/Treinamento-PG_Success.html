@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação Recebida</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #00438c;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+  %%[
+        VAR @nomeSolicitante, @emailSolicitante, @areaSolicitante, @marca, @tipoSolicitacao, @nomeContato, @cpf, @selecaoCanal, @numeroInscricao, @matricula, @situacaoReclamante
+
+        /* Captura os valores da query string */
+        SET @nomeSolicitante = QueryParameter("nomeSolicitante")
+        SET @emailSolicitante = QueryParameter("emailSolicitante")
+        SET @marca = QueryParameter("marca")
+        SET @tipoSolicitacao = QueryParameter("tipoSolicitacao")
+        SET @cpf = QueryParameter("cpf")
+        SET @selecaoCanal = QueryParameter("selecaoCanal")
+        SET @situacaoSolicitante = QueryParameter("situacaoSolicitante")
+        SET @telefoneSolicitante = QueryParameter("telefoneSolicitante")
+        SET @emailSolicitante = QueryParameter("emailSolicitanteCanal")
+
+        /* Salva os dados na Data Extension */
+        INSERTDE("DE_Solicitacao_YUDUQS_Forms_Optout",
+            "Nome_Solicitante", @nomeSolicitante,
+            "Email_Solicitante", @emailSolicitante,
+            "Area_Solicitante", @areaSolicitante,
+            "Marca", @marca,
+            "Tipo_Solicitacao", @tipoSolicitacao,
+            "CPF", @cpf,
+            "Selecao_Canal", @selecaoCanal,
+            "Situacao_Reclamante", @situacaoSolicitante,
+            "Email_Reclamante", @emailSolicitante,
+            "Telefone_Reclamante", @telefoneSolicitante
+        )
+    ]%%
+  
+  
+    <div class="container">
+        <h2>Solicitação Enviada com Sucesso!</h2>
+        <p>Obrigado por enviar sua solicitação.</p>
+    </div>
+</body>
+</html>
